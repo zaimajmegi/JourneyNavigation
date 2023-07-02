@@ -14,6 +14,41 @@ namespace TaskManagement.API.Services
             _unitOfWork = unitOfWork;
         }
 
+        public TaskDto AddTask(TaskDto task)
+        {
+            var taskDb = task.ToEntity();
+
+            _unitOfWork.Tasks.Add(taskDb);
+
+            return task;
+        }
+
+        public async Task<TaskDto> UpdateTask(int taskId, TaskDto updatedTask)
+        {
+            var task = await _unitOfWork.Tasks.GetAsync(taskId);
+            if (task == null)
+                throw new Exception("Task not found");
+
+            var taskNew = updatedTask.ToEntity();
+            task = taskNew;
+
+            _unitOfWork.Tasks.Update(task);
+
+            return updatedTask;
+        }
+
+        public async Task<TaskDto> DeleteTask(int taskId)
+        {
+            var task = await _unitOfWork.Tasks.GetAsync(taskId);
+            if (task == null)
+                throw new Exception("Task not found");
+
+            _unitOfWork.Tasks.Remove(task);
+
+            var taskDto = TaskDto.FromEntity(task);
+            return taskDto;
+        }
+
         public async Task<TaskDto> GetTaskById(int taskId)
         {
             var task = await _unitOfWork.Tasks.GetAsync(taskId);

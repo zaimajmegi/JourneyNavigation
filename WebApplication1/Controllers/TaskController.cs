@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.API.Dtos;
 using TaskManagement.Domain.Interfaces;
 
 namespace TaskManagement.API.Controllers
@@ -13,6 +14,30 @@ namespace TaskManagement.API.Controllers
         public TaskController(ITaskService taskService )
         {
             _taskService = taskService;
+        }
+
+        [HttpPost(nameof(AddTask))]
+        [Authorize]
+        public IActionResult AddTask(TaskDto task)
+        {
+            var result = _taskService.AddTask(task);
+            return Ok(result);
+        }
+
+        [HttpPost(nameof(UpdateTask))]
+        [Authorize]
+        public IActionResult UpdateTask(int taskId, TaskDto updatedTask)
+        {
+            var result = _taskService.UpdateTask(taskId, updatedTask);
+            return Ok(result);
+        }
+
+        [HttpPost(nameof(DeleteTask))]
+        [Authorize]
+        public IActionResult DeleteTask(int taskId)
+        {
+            var result = _taskService.DeleteTask(taskId);
+            return Ok(result);
         }
 
         [HttpGet(nameof(GetTaskById))]
