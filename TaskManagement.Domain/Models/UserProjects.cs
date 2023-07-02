@@ -13,7 +13,7 @@ namespace TaskManagement.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public User? UserId { get; set; }
-        public Project? ProjectId { get; set; }
+        public User? User { get; set; }
+        public Project? Project { get; set; }
     }
 }

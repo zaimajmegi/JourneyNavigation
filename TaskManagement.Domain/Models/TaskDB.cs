@@ -23,7 +23,7 @@ namespace TaskManagement.Domain.Models
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? DueDate { get; set; }
         public int TaskStatus { get; set; }
-        public Project? ProjectId { get; set; }
-        public TaskPriority? TaskPriorityId { get; set; }
+        public Project? Project { get; set; }
+        public TaskPriority? TaskPriority { get; set; }
     }
 }
