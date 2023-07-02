@@ -7,5 +7,8 @@ namespace TaskManagement.Infrastructure
     {
         public ApplicationDbContext GetDbContext();
         ITaskRepository Tasks { get; }
+        IUsersRepository Users { get; }
+        IProjectsRepository Projects { get; }
+        IPriorityRepository Priorities { get; }
     }
 }

@@ -13,6 +13,9 @@ namespace TaskManagement.Infrastructure
     {
         ApplicationDbContext _context;
         ITaskRepository _taskRepository;
+        IUsersRepository _userRepository;
+        IProjectsRepository _projectRepository;
+        IPriorityRepository _priorityRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -31,6 +34,39 @@ namespace TaskManagement.Infrastructure
                     _taskRepository = new TaskRepository(_context);
 
                 return _taskRepository;
+            }
+        }
+
+        public IUsersRepository Users
+        {
+            get
+            {
+                if (_userRepository == null)
+                    _userRepository = new UserRepository(_context);
+
+                return _userRepository;
+            }
+        }
+
+        public IProjectsRepository Projects
+        {
+            get
+            {
+                if (_projectRepository == null)
+                    _projectRepository = new ProjectRepository(_context);
+
+                return _projectRepository;
+            }
+        }
+
+        public IPriorityRepository Priorities
+        {
+            get
+            {
+                if (_priorityRepository == null)
+                    _priorityRepository = new PriorityRepository(_context);
+
+                return _priorityRepository;
             }
         }
     }

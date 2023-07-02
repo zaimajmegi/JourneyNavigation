@@ -7,9 +7,7 @@ using TaskManagement.Domain.Models;
 
 namespace TaskManagement.Domain.Interfaces
 {
-    public interface ITaskRepository : IRepository<TaskDB>
+    public interface IProjectsRepository : IRepository<Project>
     {
-        List<TaskDB> GetProjectTasks(Project project);
-        List<TaskDB> FilterByPriority(TaskPriority priority);
     }
 }

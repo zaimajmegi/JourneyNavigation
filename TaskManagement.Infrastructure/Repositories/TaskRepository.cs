@@ -14,6 +14,14 @@ namespace TaskManagement.Infrastructure.Repositories
             _appContext = context;
         }
 
+        public List<TaskDB> GetProjectTasks(Project project)
+        {
+            return _appContext.Tasks.Where(p => p.Project == project).ToList();
+        }
 
+        public List<TaskDB> FilterByPriority(TaskPriority priority)
+        {
+            return _appContext.Tasks.Where(p => p.TaskPriority == priority).ToList();
+        }
     }
 }
