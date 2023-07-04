@@ -19,11 +19,16 @@ namespace TaskManagement.Domain.Models
         [MaxLength(500)]
         public string TaskDesc { get; set; } = string.Empty;
         public User? CreatedBy { get; set; }
+        public string? CreatedById { get; set; }
         public User? AssignedTo { get; set; }
+        public string? AssignedToId { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? DueDate { get; set; }
         public int TaskStatus { get; set; }
         public Project? Project { get; set; }
+        public int ProjectId { get; set; }
         public TaskPriority? TaskPriority { get; set; }
+        public int? TaskPriorityId { get; set; }
+
     }
 }

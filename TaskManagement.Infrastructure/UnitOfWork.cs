@@ -25,6 +25,10 @@ namespace TaskManagement.Infrastructure
         {
             return _context;
         }
+        public async Task SaveChangesAsync()
+        {
+             await _context.SaveChangesAsync();
+        }
 
         public ITaskRepository Tasks
         {

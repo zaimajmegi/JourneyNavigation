@@ -3,7 +3,8 @@ using TaskManagement.Domain.Models;
 
 namespace TaskManagement.API.Dtos
 {
-    public class ProjectDto : BaseDto<Project, Project>
+    public class ProjectDto : BaseDto<ProjectDto, Project>
     {
+        public string ProjectName { get; set; } = string.Empty;
     }
 }

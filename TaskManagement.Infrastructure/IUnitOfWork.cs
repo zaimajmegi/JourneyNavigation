@@ -5,7 +5,8 @@ namespace TaskManagement.Infrastructure
 {
     public interface IUnitOfWork
     {
-        public ApplicationDbContext GetDbContext();
+        Task SaveChangesAsync();
+        ApplicationDbContext GetDbContext();
         ITaskRepository Tasks { get; }
         IUsersRepository Users { get; }
         IProjectsRepository Projects { get; }

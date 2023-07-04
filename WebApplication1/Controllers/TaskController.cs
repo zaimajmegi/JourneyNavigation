@@ -7,6 +7,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
@@ -17,82 +18,77 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost(nameof(AddTask))]
-        [Authorize]
-        public IActionResult AddTask(TaskDto task)
+        public async Task<IActionResult> AddTask([FromBody]TaskDto task)
         {
-            var result = _taskService.AddTask(task);
+            var result = await _taskService.AddTask(task);
             return Ok(result);
         }
 
-        [HttpPost(nameof(UpdateTask))]
-        [Authorize]
-        public IActionResult UpdateTask(int taskId, TaskDto updatedTask)
+        [HttpPut(nameof(UpdateTask))]
+        public async Task<IActionResult> UpdateTask(TaskDto updatedTask)
         {
-            var result = _taskService.UpdateTask(taskId, updatedTask);
+            var result = await _taskService.UpdateTask(updatedTask);
             return Ok(result);
         }
 
-        [HttpPost(nameof(DeleteTask))]
-        [Authorize]
-        public IActionResult DeleteTask(int taskId)
+        [HttpDelete(nameof(DeleteTask))]
+        public async Task<IActionResult> DeleteTask(int taskId)
         {
-            var result = _taskService.DeleteTask(taskId);
+            var result = await _taskService.DeleteTask(taskId);
             return Ok(result);
         }
 
         [HttpGet(nameof(GetTaskById))]
-        [Authorize]
-        public IActionResult GetTaskById(int taskId)
+        public async Task<IActionResult> GetTaskById(int taskId)
         {
-            var result = _taskService.GetTaskById(taskId);
+            var result = await _taskService.GetTaskById(taskId);
             return Ok(result);
         }
 
-        [HttpPost(nameof(AssignTaskUser))]
-        [Authorize]
-        public IActionResult AssignTaskUser(int taskId, int userId)
+        [HttpPut(nameof(AssignTaskUser))]
+        public async Task<IActionResult> AssignTaskUser(int taskId, int userId)
         {
-            var result = _taskService.AssignTaskUser(taskId, userId);
+            var result = await _taskService.AssignTaskUser(taskId, userId);
             return Ok(result);
         }
 
-        [HttpPost(nameof(SetTaskDueDate))]
-        [Authorize]
-        public IActionResult SetTaskDueDate(int taskId, DateTime dueDate)
+        [HttpPut(nameof(SetTaskDueDate))]
+        
+        public async Task<IActionResult> SetTaskDueDate(int taskId, DateTime dueDate)
         {
-            var result = _taskService.SetTaskDueDate(taskId, dueDate);
+            var result = await _taskService.SetTaskDueDate(taskId, dueDate);
             return Ok(result);
         }
 
-        [HttpPost(nameof(AddTaskDescription))]
-        [Authorize]
-        public IActionResult AddTaskDescription(int taskId, string desc)
+        [HttpPut(nameof(AddTaskDescription))]
+        
+        public async Task<IActionResult> AddTaskDescription(int taskId, string desc)
         {
-            var result = _taskService.AddTaskDescription(taskId, desc);
+            var result = await _taskService.AddTaskDescription(taskId, desc);
             return Ok(result);
         }
 
         [HttpGet(nameof(TrackTask))]
-        [Authorize]
-        public IActionResult TrackTask(int taskId)
+        
+        public async Task<IActionResult> TrackTask(int taskId)
         {
-            var result = _taskService.TrackTask(taskId);
+            var result = await  _taskService.TrackTask(taskId);
             return Ok(result);
         }
 
         [HttpGet(nameof(GetProjectTasks))]
-        [Authorize]
-        public IActionResult GetProjectTasks(int projectId)
+        
+        public async Task<IActionResult> GetProjectTasks(int projectId)
         {
-            var result = _taskService.GetProjectTasks(projectId);
+            var result = await _taskService.GetProjectTasks(projectId);
             return Ok(result);
         }
 
         [HttpGet(nameof(FilterByPriority))]
-        [Authorize]
-        public IActionResult FilterByPriority(int priorityId)
+        
+        public async Task<IActionResult> FilterByPriority(int priorityId)
         {
-            var result = _taskService.FilterByPriority(priorityId);
+            var result = await _taskService.FilterByPriority(priorityId);
             return Ok(result);
         }
     }

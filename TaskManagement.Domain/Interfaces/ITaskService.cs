@@ -4,8 +4,8 @@ namespace TaskManagement.Domain.Interfaces
 {
     public interface ITaskService
     {
-        TaskDto AddTask(TaskDto task);
-        Task<TaskDto> UpdateTask(int taskId, TaskDto updatedTask);
+        Task<TaskDto> AddTask(TaskDto task);
+        Task<TaskDto> UpdateTask(TaskDto updatedTask);
         Task<TaskDto> DeleteTask(int taskId);
         Task<TaskDto> GetTaskById(int taskId);
         Task<TaskDto> AssignTaskUser(int taskId, int userId);

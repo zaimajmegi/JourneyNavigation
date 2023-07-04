@@ -2,6 +2,7 @@
 using TaskManagement.Domain.Interfaces;
 using TaskManagement.Infrastructure;
 using TaskManagement.API.Extensions;
+using TaskManagement.Domain.Models;
 
 namespace TaskManagement.API.Services
 {
@@ -14,25 +15,26 @@ namespace TaskManagement.API.Services
             _unitOfWork = unitOfWork;
         }
 
-        public TaskDto AddTask(TaskDto task)
+        public async Task<TaskDto> AddTask(TaskDto task)
         {
             var taskDb = task.ToEntity();
 
             _unitOfWork.Tasks.Add(taskDb);
+            await _unitOfWork.SaveChangesAsync();
 
             return task;
         }
 
-        public async Task<TaskDto> UpdateTask(int taskId, TaskDto updatedTask)
+        public async Task<TaskDto> UpdateTask(TaskDto updatedTask)
         {
-            var task = await _unitOfWork.Tasks.GetAsync(taskId);
+            var task = await _unitOfWork.Tasks.GetAsync(updatedTask.Id);
             if (task == null)
                 throw new Exception("Task not found");
 
-            var taskNew = updatedTask.ToEntity();
-            task = taskNew;
+            updatedTask.ToEntity(task);
 
             _unitOfWork.Tasks.Update(task);
+            await _unitOfWork.SaveChangesAsync();
 
             return updatedTask;
         }
@@ -44,6 +46,7 @@ namespace TaskManagement.API.Services
                 throw new Exception("Task not found");
 
             _unitOfWork.Tasks.Remove(task);
+            await _unitOfWork.SaveChangesAsync();
 
             var taskDto = TaskDto.FromEntity(task);
             return taskDto;
@@ -71,6 +74,7 @@ namespace TaskManagement.API.Services
 
             task.AssignedTo = user;
             _unitOfWork.Tasks.Update(task);
+            await _unitOfWork.SaveChangesAsync();
 
             var taskDto = TaskDto.FromEntity(task);
             return taskDto;
@@ -87,6 +91,7 @@ namespace TaskManagement.API.Services
 
             task.DueDate = dueDate;
             _unitOfWork.Tasks.Update(task);
+            await _unitOfWork.SaveChangesAsync();
 
             var taskDto = TaskDto.FromEntity(task);
             return taskDto;
@@ -100,6 +105,7 @@ namespace TaskManagement.API.Services
 
             task.TaskDesc = taskDesc;
             _unitOfWork.Tasks.Update(task);
+            await _unitOfWork.SaveChangesAsync();
 
             var taskDto = TaskDto.FromEntity(task);
             return taskDto;

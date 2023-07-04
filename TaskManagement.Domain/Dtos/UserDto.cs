@@ -6,7 +6,7 @@ namespace TaskManagement.API.Dtos
     public class UserDto : BaseDto<UserDto, User>
     {
         public string? UserName { get; set; }
-        public virtual string? PasswordHash { get; set; }
+        public virtual string? Password { get; set; }
 
     }
 }

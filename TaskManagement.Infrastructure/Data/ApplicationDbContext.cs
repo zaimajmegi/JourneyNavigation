@@ -39,11 +39,6 @@ namespace TaskManagement.Infrastructure.Data
                 new TaskPriority { Id = 2, PriorityDesc = "Medium" },
                 new TaskPriority { Id = 3, PriorityDesc = "Low" }
                 );
-
-            modelBuilder.Entity<User>().HasData(
-                new User { Id = Guid.NewGuid().ToString(), SecurityStamp = Guid.NewGuid().ToString(), IsActive = true, UserName = "testUser", CreatedOn = DateTime.Now,
-                    Email = "zaimajmegi@gmail.com", PasswordHash = "123456", PhoneNumber = "0698127570" }
-                );
         }
     }
 }

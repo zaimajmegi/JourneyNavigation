@@ -11,6 +11,6 @@ namespace TaskManagement.Domain.Interfaces
     public interface ILoginService
     {
         string Generate(User user);
-        User Authenticate(UserDto userLogin);
+        Task<User> Authenticate(UserDto userLogin);
     }
 }

@@ -8,17 +8,22 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TaskManagement.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagement.API.Services
 {
-    public class LoginService : ILoginService
+    public class AuthenticationService : ILoginService
     {
         private IConfiguration _config;
         protected readonly ApplicationDbContext _context;
-        public LoginService(ApplicationDbContext context, IConfiguration config)
+        private readonly UserManager<User> _userManager;
+
+        public AuthenticationService(ApplicationDbContext context, IConfiguration config, UserManager<User> userManager)
         {
             _context = context;
             _config = config;
+            _userManager = userManager;
+
         }
 
 
@@ -42,16 +47,20 @@ namespace TaskManagement.API.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public User Authenticate(UserDto userLogin)
+        public async Task<User> Authenticate(UserDto userLogin)
         {
-            var currentUser = _context.Users.FirstOrDefault(o => o.UserName.ToLower() == userLogin.UserName.ToLower() && o.PasswordHash == userLogin.PasswordHash);
+            var currentUser = await _userManager.FindByNameAsync(userLogin.UserName);
 
-            if (currentUser != null)
+            if (currentUser == null)
             {
-                return currentUser;
+                throw new Exception("User not found");
             }
-
-            return null;
+            else if(!await _userManager.CheckPasswordAsync(currentUser, userLogin.Password))
+            {
+                throw new Exception("Password is incorrect");
+            }
+             
+            return currentUser;
         }
     }
 }
