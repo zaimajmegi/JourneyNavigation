@@ -7,7 +7,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
@@ -46,7 +46,7 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPut(nameof(AssignTaskUser))]
-        public async Task<IActionResult> AssignTaskUser(int taskId, int userId)
+        public async Task<IActionResult> AssignTaskUser(int taskId, string userId)
         {
             var result = await _taskService.AssignTaskUser(taskId, userId);
             return Ok(result);

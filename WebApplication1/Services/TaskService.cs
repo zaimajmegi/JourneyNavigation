@@ -62,7 +62,7 @@ namespace TaskManagement.API.Services
             return taskDto;
         }
 
-        public async Task<TaskDto> AssignTaskUser(int taskId, int userId)
+        public async Task<TaskDto> AssignTaskUser(int taskId, string userId)
         {
             var task = await _unitOfWork.Tasks.GetAsync(taskId);
             if (task == null)

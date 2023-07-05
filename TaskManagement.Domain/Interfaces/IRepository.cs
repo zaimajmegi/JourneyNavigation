@@ -29,6 +29,7 @@ namespace TaskManagement.Domain.Interfaces
         IQueryable<TEntity> GetAllQueryable();
 
         Task<TEntity> GetAsync(int id);
+        Task<TEntity> GetAsync(string id);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
        

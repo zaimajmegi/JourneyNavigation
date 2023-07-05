@@ -40,7 +40,7 @@ public class ExceptionHandler
         // TODO: Use Json converter
         //var jsonMesage = $"{{\"message\": \"{errorMessage}\"}}";
 
-        await context.Response.WriteAsync(exception.Message);
+        await context.Response.WriteAsync(errorMessage);
     }
 
     public HttpStatusCode GetStatusCode(Exception exception)

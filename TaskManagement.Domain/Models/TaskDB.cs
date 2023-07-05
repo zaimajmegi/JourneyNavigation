@@ -24,6 +24,8 @@ namespace TaskManagement.Domain.Models
         public string? AssignedToId { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? DueDate { get; set; }
+
+        [Range(0, 100, ErrorMessage = "Task staus should be between 0 and 100%")]
         public int TaskStatus { get; set; }
         public Project? Project { get; set; }
         public int ProjectId { get; set; }

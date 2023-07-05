@@ -66,6 +66,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
         };
     });
+builder.Services.AddAuthorization();
+
 builder.Services.AddMvc();
 
 
@@ -89,9 +91,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandler>();
 
 app.UseAuthentication();
-app.UseMiddleware<ExceptionHandler>();
 app.UseAuthorization();
 
 app.MapControllers();

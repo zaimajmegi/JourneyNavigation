@@ -8,7 +8,7 @@ namespace TaskManagement.Domain.Interfaces
         Task<TaskDto> UpdateTask(TaskDto updatedTask);
         Task<TaskDto> DeleteTask(int taskId);
         Task<TaskDto> GetTaskById(int taskId);
-        Task<TaskDto> AssignTaskUser(int taskId, int userId);
+        Task<TaskDto> AssignTaskUser(int taskId, string userId);
         Task<TaskDto> SetTaskDueDate(int taskId, DateTime dueDate);
         Task<TaskDto> AddTaskDescription(int taskId, string taskDesc);
         Task<int> TrackTask(int taskId);

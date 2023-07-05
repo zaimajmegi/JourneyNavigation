@@ -149,6 +149,15 @@ namespace TaskManagement.Infrastructure.Repositories
             }
             return null;
         }
+        public virtual async Task<TEntity> GetAsync(string id)
+        {
+            var temp = await _entities.FindAsync(id);
+            if (temp != null)
+            {
+                return temp;
+            }
+            return null;
+        }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {

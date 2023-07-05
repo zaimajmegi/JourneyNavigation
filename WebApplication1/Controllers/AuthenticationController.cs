@@ -50,15 +50,15 @@ namespace TaskManagement.API.Controllers
                 return BadRequest();
 
             var user = new User { UserName = userForRegistration.Username, Email = userForRegistration.Email };
-            var role = "user";
+            //var role = "user";
 
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-            var r = await _userManager.AddToRoleAsync(user, role);
+            //var r = await _userManager.AddToRoleAsync(user, role);
             if (!result.Succeeded)
             {
-                var errors = result.Errors.Select(e => e.Description);
+                var error = result.Errors.FirstOrDefault().Description;
 
-                //return BadRequest(new RegistrationResponseDto { Errors = errors });
+                throw new Exception(error);
             }
 
             return StatusCode(201);

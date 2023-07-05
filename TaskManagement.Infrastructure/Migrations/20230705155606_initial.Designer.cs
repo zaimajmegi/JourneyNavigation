@@ -12,8 +12,8 @@ using TaskManagement.Infrastructure.Data;
 namespace TaskManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230702111259_Initial")]
-    partial class Initial
+    [Migration("20230705155606_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,7 @@ namespace TaskManagement.Infrastructure.Migrations
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("TaskDesc")
@@ -324,25 +324,6 @@ namespace TaskManagement.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0ef76ac5-75e0-4e58-8ddd-c3f5db9d1002",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "876ff891-c1c8-4318-b066-18e52b07e61a",
-                            CreatedOn = new DateTime(2023, 7, 2, 13, 12, 59, 482, DateTimeKind.Local).AddTicks(54),
-                            Email = "zaimajmegi@gmail.com",
-                            EmailConfirmed = false,
-                            IsActive = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "123456",
-                            PhoneNumber = "0698127570",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "409ae101-a0f3-4f1a-90df-c2349ccf0190",
-                            TwoFactorEnabled = false,
-                            UserName = "testUser"
-                        });
                 });
 
             modelBuilder.Entity("TaskManagement.Domain.Models.UserProjects", b =>
@@ -482,7 +463,9 @@ namespace TaskManagement.Infrastructure.Migrations
 
                     b.HasOne("TaskManagement.Domain.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TaskManagement.Domain.Models.TaskPriority", "TaskPriority")
                         .WithMany()

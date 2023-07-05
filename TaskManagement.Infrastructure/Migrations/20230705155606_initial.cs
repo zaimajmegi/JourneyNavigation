@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaskManagement.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -207,7 +207,7 @@ namespace TaskManagement.Infrastructure.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TaskStatus = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: true),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
                     TaskPriorityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -232,7 +232,8 @@ namespace TaskManagement.Infrastructure.Migrations
                         name: "FK_Tasks_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,11 +259,6 @@ namespace TaskManagement.Infrastructure.Migrations
                         principalTable: "Projects",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedOn", "Email", "EmailConfirmed", "IsActive", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "0ef76ac5-75e0-4e58-8ddd-c3f5db9d1002", 0, "876ff891-c1c8-4318-b066-18e52b07e61a", new DateTime(2023, 7, 2, 13, 12, 59, 482, DateTimeKind.Local).AddTicks(54), "zaimajmegi@gmail.com", false, true, false, null, null, null, "123456", "0698127570", false, "409ae101-a0f3-4f1a-90df-c2349ccf0190", false, "testUser" });
 
             migrationBuilder.InsertData(
                 table: "Priorities",
