@@ -5,13 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using TaskManagement.API.Middlewares;
-using TaskManagement.API.Services;
-using TaskManagement.Domain.Interfaces;
-using TaskManagement.Domain.Models;
-using TaskManagement.Infrastructure;
-using TaskManagement.Infrastructure.Data;
-using AuthenticationService = TaskManagement.API.Services.AuthenticationService;
+using JourneyNavigation.API.Middlewares;
+using JourneyNavigation.API.Services;
+using JourneyNavigation.Domain.Interfaces;
+using JourneyNavigation.Domain.Models;
+using JourneyNavigation.Infrastructure;
+using JourneyNavigation.Infrastructure.Data;
+using AuthenticationService = JourneyNavigation.API.Services.AuthenticationService;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration Configuration;
@@ -79,7 +79,7 @@ builder.Services.AddApplicationDbContext(Configuration.GetConnectionString("SqlS
 
 //builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapperProfile)));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IJourneyService, JourneyService>();
 builder.Services.AddScoped<ILoginService, AuthenticationService>();
 var app = builder.Build();
 

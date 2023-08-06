@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace TaskManagement.API.Middlewares;
+namespace JourneyNavigation.API.Middlewares;
 
 public class ExceptionHandler
 {
@@ -38,9 +38,9 @@ public class ExceptionHandler
         var errorMessage = exception.InnerException?.Message ?? exception.Message;
 
         // TODO: Use Json converter
-        //var jsonMesage = $"{{\"message\": \"{errorMessage}\"}}";
+        var jsonMesage = $"{{\"message\": \"{errorMessage}\"}}";
 
-        await context.Response.WriteAsync(errorMessage);
+        await context.Response.WriteAsync(jsonMesage);
     }
 
     public HttpStatusCode GetStatusCode(Exception exception)

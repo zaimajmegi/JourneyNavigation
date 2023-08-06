@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using TaskManagement.API.Dtos;
-using TaskManagement.Domain.Models;
+using JourneyNavigation.Domain.Dtos;
+using JourneyNavigation.Domain.Models;
 
-namespace TaskManagement.Domain.Mapper
+namespace JourneyNavigation.Domain.Mapper
 {
     public class AutoMapperProfile : Profile
     {

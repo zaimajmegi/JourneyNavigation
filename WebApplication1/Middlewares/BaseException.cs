@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace TaskManagement.API.Middlewares;
+namespace JourneyNavigation.API.Middlewares;
 
 public class BaseException : Exception
 {

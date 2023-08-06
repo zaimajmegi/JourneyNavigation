@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.API", "WebApplication1\TaskManagement.API.csproj", "{F86F581D-82F2-4EA1-A2E9-10EC133763F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JourneyNavigation.API", "WebApplication1\JourneyNavigation.API.csproj", "{F86F581D-82F2-4EA1-A2E9-10EC133763F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Domain", "TaskManagement.Domain\TaskManagement.Domain.csproj", "{9B912BE4-3262-4710-8FB7-C1884CC70366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JourneyNavigation.Domain", "JourneyNavigation.Domain\JourneyNavigation.Domain.csproj", "{9B912BE4-3262-4710-8FB7-C1884CC70366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Infrastructure", "TaskManagement.Infrastructure\TaskManagement.Infrastructure.csproj", "{87C52AC2-A907-4B94-8176-661D83AE9A2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JourneyNavigation.Infrastructure", "JourneyNavigation.Infrastructure\JourneyNavigation.Infrastructure.csproj", "{87C52AC2-A907-4B94-8176-661D83AE9A2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

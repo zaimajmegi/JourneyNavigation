@@ -7,13 +7,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using TaskManagement.API.Dtos;
-using TaskManagement.Domain.Dtos;
-using TaskManagement.Domain.Interfaces;
-using TaskManagement.Domain.Models;
-using TaskManagement.Infrastructure.Data;
+using JourneyNavigation.Domain.Dtos;
+using JourneyNavigation.Domain.Interfaces;
+using JourneyNavigation.Domain.Models;
 
-namespace TaskManagement.API.Controllers
+namespace JourneyNavigation.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,11 +19,13 @@ namespace TaskManagement.API.Controllers
     {
         private readonly ILoginService _loginService;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<UserRole> _userroleManager;
 
-        public AuthenticationController(ILoginService loginService, UserManager<User> userManager)
+        public AuthenticationController(ILoginService loginService, UserManager<User> userManager, RoleManager<UserRole> userroleManager)
         {
             _loginService = loginService;
             _userManager = userManager;
+            _userroleManager = userroleManager;
         }
 
         [AllowAnonymous]
@@ -36,7 +36,9 @@ namespace TaskManagement.API.Controllers
 
             if (user != null)
             {
-                var token = _loginService.Generate(user);
+                var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+                var token = _loginService.Generate(user, isAdmin);
                 return Ok(token);
             }
 
@@ -64,5 +66,5 @@ namespace TaskManagement.API.Controllers
             return StatusCode(201);
         }
 
-        }
+    }
 }

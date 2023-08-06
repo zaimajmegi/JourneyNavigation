@@ -1,16 +1,16 @@
-﻿using TaskManagement.API.Dtos;
-using TaskManagement.Domain.Interfaces;
-using TaskManagement.Infrastructure;
-using TaskManagement.API.Extensions;
-using TaskManagement.Infrastructure.Data;
+﻿using JourneyNavigation.Domain.Dtos;
+using JourneyNavigation.Domain.Interfaces;
+using JourneyNavigation.API.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TaskManagement.Domain.Models;
+using JourneyNavigation.Domain.Models;
 using Microsoft.AspNetCore.Identity;
+using JourneyNavigation.Infrastructure.Data;
+using System.Data;
 
-namespace TaskManagement.API.Services
+namespace JourneyNavigation.API.Services
 {
     public class AuthenticationService : ILoginService
     {
@@ -27,16 +27,15 @@ namespace TaskManagement.API.Services
         }
 
 
-        public string Generate(User user)
+        public string Generate(User user, bool isAdmin)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserName));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            if (isAdmin) claims.Add(new Claim(ClaimTypes.Role, "Admin"));
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Audience"],
